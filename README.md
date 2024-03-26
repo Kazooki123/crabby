@@ -34,6 +34,10 @@ Here's a simple "Hello, World!" program written in Crabby:
 output.print("Hello, World!");
 ```
 
+### Notes
+
+output.print = Is the syntax for printing the hello world.
+
 ## Contributing
 
 ### We welcome contributions from the community. If you'd like to contribute to Crabby, please read our contributing guidelines

@@ -7,7 +7,7 @@ const Tokenizer = struct {
     index: usize,
 
     fn nextToken(self: *Self) !?[]const u8 {
-        while (self.index < self.source.len and std.mem.isWhiteSpace(self.source[self.index])) {
+        while (self.index < self.source.len and std.ascii.isWhitespace(self.source[self.index])) {
             self.index += 1;
         }
 
