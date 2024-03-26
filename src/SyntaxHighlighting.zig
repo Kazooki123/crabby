@@ -24,7 +24,6 @@ pub fn nextToken(lexer: *Lexer) (Token, []const u8) {
         switch (c) {
             // Handle whitespace and other non-token characters
             // For simplicity, let's skip them for now
-            // You might want to handle them differently based on your needs
             _ => {},
         }
 
