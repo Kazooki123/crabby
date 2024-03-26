@@ -1,8 +1,11 @@
-# Crabby: The New Programming Language of the Modern Programming Era
+# Crabby🦀: The New Programming Language of the Modern Programming Era
 
 ## Introduction
 
 Welcome to the world of Crabby, a revolutionary programming language designed to meet the demands of the modern programming era. Crabby is not just another language; it's a paradigm shift that aims to redefine the way we approach programming.
+
+## Note:
+Crabby isn't a fully functional programming language yet. So that's why we need you to help us create crabby. I'm also trying to create the download website for Crabby🦀 Which will be released sooner.
 
 ## Features
 
@@ -18,19 +21,12 @@ Crabby is built for speed. It's optimized for performance, ensuring that your pr
 
 Crabby is a versatile language. It supports multiple programming paradigms, allowing you to choose the best approach for each task. Whether you prefer procedural, object-oriented, or functional programming, Crabby has you covered.
 
-## Getting Started
-
-To start using Crabby, you'll need to install it on your computer. Here's a simple guide to get you started:
-
-1. Download the latest version of Crabby from our website.
-2. Install Crabby by following the instructions provided.
-3. Open your favorite text editor or IDE and start writing your first Crabby program.
-
 ## Examples
 
 Here's a simple "Hello, World!" program written in Crabby:
 
 ```crabby
+// hello.cb ("cb" short for crabby)
 output.print("Hello, World!");
 ```
 
