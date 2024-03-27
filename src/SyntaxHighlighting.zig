@@ -1,12 +1,11 @@
 const std = @import("std");
 
 const Token = enum {
-    // Define your token types here
-    // For example:
+    // Defining the token types
     Keyword,
     Identifier,
     StringLiteral,
-    // Add more as needed
+    // Adding more as needed
 };
 
 const Lexer = struct {
