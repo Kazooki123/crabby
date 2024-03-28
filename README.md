@@ -1,6 +1,10 @@
 # Crabby🦀: The New Programming Language of the Modern Programming Era
 
+[![StarloSearch](https://avatars.githubusercontent.com/u/139462470?s=48&v=4)](https://github.com/Kazooki123/starlosearch.git)
+
 ## Introduction
+
+![Website](https://github.com/Kazooki123/crabby/examples/crabbylogo.jpg)
 
 Welcome to the world of Crabby, a revolutionary programming language made entirely in the **Zig** language, designed to meet the demands of the modern programming era. Crabby is not just another language; it's a paradigm shift that aims to redefine the way we approach programming.
 
