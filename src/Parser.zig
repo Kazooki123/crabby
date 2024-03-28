@@ -6,48 +6,74 @@ const Tokenizer = struct {
     source: []const u8,
     index: usize,
 
-    fn nextToken(self: *Self) !?[]const u8 {
-        while (self.index < self.source.len and std.ascii.isWhitespace(self.source[self.index])) {
-            self.index += 1;
-        }
+    // Function to get the next token
+    pub fn nextToken(self: *Self) []const u8 {
+        while (self.index < self.source.len) {
+            const char = self.source[self.index];
+            switch (char) {
+                // Handle whitespace
+                if (std.ascii.isWhitespace(char)) {
+                    self.index += 1;
+                }
 
-        if (self.index >= self.source.len) return null;
+                // Handle string literals
+                if (char == '"') {
+                    const start = self.index;
+                    self.index += 1;
+                    while (self.index < self.source.len and self.source[self.index] != '"') {
+                        self.index += 1;
+                    }
+                    if (self.index < self.source.len) {
+                        self.index += 1; // Skip the closing quote
+                        return self.source[start..self.index];
+                    } else {
+                        std.debug.print("Error: Unterminated string literal.\\n", .{});
+                        return null;
+                    }
+                }
 
-        if (std.mem.startsWith(u8, self.source[self.index..], "output.print")) {
-            const start = self.index;
-            self.index += "output.print".len;
-            return self.source[start..self.index];
-        }
+                // Handle semicolon
+                if (char == ';') {
+                    const start = self.index;
+                    self.index += 1;
+                    return self.source[start..self.index];
+                }
 
-        if (self.source[self.index] == '"') {
-            const start = self.index;
-            self.index += 1;
-            while (self.index < self.source.len and self.source[self.index] != '"') {
-                self.index += 1;
+                // Handle "boolean" keyword
+                if (std.mem.startsWith(u8, self.source[self.index..], "boolean")) {
+                    const start = self.index;
+                    self.index += "boolean".len;
+                    return self.source[start..self.index];
+                }
+
+                // Handle "var" keyword
+                if (std.mem.startsWith(u8, self.source[self.index..], "var")) {
+                    const start = self.index;
+                    self.index += "var".len;
+                    return self.source[start..self.index];
+                }
+
+                // Handle "fun" keyword
+                if (std.mem.startsWith(u8, self.source[self.index..], "fun")) {
+                    const start = self.index;
+                    self.index += "fun".len;
+                    return self.source[start..self.index];
+                }
+
+                // Handle other characters (error case)
+                std.debug.print("Error: Unexpected character: '{}'.\\n", .{char});
+                return null;
             }
-            if (self.index < self.source.len) {
-                self.index += 1; // Skip the closing quote
-                return self.source[start..self.index];
-            } else {
-                std.debug.print("Error: Unterminated string literal.\n", .{});
-                return error.UnterminatedStringLiteral;
-            }
         }
 
-        if (self.source[self.index] == ';') {
-            const start = self.index;
-            self.index += 1;
-            return self.source[start..self.index];
-        }
-
-        std.debug.print("Error: Unexpected character: '{}'.\n", .{self.source[self.index]});
-        return error.UnexpectedCharacter;
+        // No more tokens
+        return null;
     }
 };
 
-pub fn main() !void {
+pub fn main() void {
     const allocator = std.heap.page_allocator;
-    const file_path = "hello.cb";
+    const file_path = "hello.cb"; // Change this to your actual file path
     const file = try std.fs.cwd().openFile(file_path, .{});
     defer file.close();
 
@@ -56,9 +82,13 @@ pub fn main() !void {
 
     var tokenizer = Tokenizer{ .source = source, .index = 0 };
     while (true) {
-        const token = try tokenizer.nextToken();
+        const token = tokenizer.nextToken();
         if (token == null) break;
 
-        std.debug.print("Token: '{}'\n", .{token});
+        // Print each token
+        std.debug.print("Token: '{}\\n'", .{token});
     }
+
+    // Print "Hello, World!"
+    std.debug.print("Hello, World!\\n", .{});
 }
