@@ -2,9 +2,12 @@
 
 [![StarloSearch](https://avatars.githubusercontent.com/u/139462470?s=48&v=4)](https://github.com/Kazooki123/starlosearch.git)
 
+![Static Badge](https://img.shields.io/badge/zig-%23F7A41D?style=for-the-badge&logo=zig&logoColor=%23F7A41D&labelColor=black)
+![GitHub License](https://img.shields.io/github/license/Kazooki123/crabby?style=for-the-badge&logo=gnu&logoColor=%23A42E2B)
+
 ## Introduction
 
-![Website](https://github.com/Kazooki123/crabby/examples/crabbylogo.jpg)
+![Logo](https://github.com/Kazooki123/crabby/blob/main/examples/crabbylogo.jpg)
 
 Welcome to the world of Crabby, a revolutionary programming language made entirely in the **Zig** language, designed to meet the demands of the modern programming era. Crabby is not just another language; it's a paradigm shift that aims to redefine the way we approach programming.
 
