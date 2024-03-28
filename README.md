@@ -2,6 +2,9 @@
 
 [![StarloSearch](https://avatars.githubusercontent.com/u/139462470?s=48&v=4)](https://github.com/Kazooki123/starlosearch.git)
 
+![Static Badge](https://img.shields.io/badge/zig-%23F7A41D?style=for-the-badge&logo=zig&logoColor=%23F7A41D&labelColor=black)
+![GitHub License](https://img.shields.io/github/license/Kazooki123/crabby?style=for-the-badge&logo=gnu&logoColor=%23A42E2B)
+
 ## Introduction
 
 ![Logo](https://github.com/Kazooki123/crabby/blob/main/examples/crabbylogo.jpg)
