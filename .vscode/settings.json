@@ -1,6 +1,9 @@
 {
-    "git.enableSmartCommit": true,
-    "editor.formatOnSave": true,
-    "editor.fontFamily": "Consolas, 'Courier New', monospace",
-    "terminal.integrated.fontFamily": "FiraCode Nerd Font"
+  "git.enableSmartCommit": true,
+  "editor.formatOnSave": true,
+  "editor.fontFamily": "Consolas, 'Courier New', monospace",
+  "terminal.integrated.fontFamily": "FiraCode Nerd Font",
+  "zig.buildOption": "build-exe",
+  "zig.path": "E:\\zig-windows-x86_64-0.12.0-dev.1861+412999621\\zig-windows-x86_64",
+  "zig.buildOnSave": true
 }
