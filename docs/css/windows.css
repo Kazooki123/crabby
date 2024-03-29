@@ -1,0 +1,63 @@
+body {
+  font-family: sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f5f5f5; /* Light gray background */
+  color: #333; /* Dark gray text */
+}
+
+.header {
+  background-color: #c0392b; /* Red shade for header */
+  padding: 20px;
+  color: #fff; /* White text for header */
+}
+
+.container {
+  display: flex;
+  justify-content: center; /* Center content horizontally */
+  margin: 50px auto; /* Add margin for better spacing */
+  max-width: 800px; /* Set a maximum width for the container */
+}
+
+.content {
+  padding: 20px;
+  background-color: #fff; /* White background for content area */
+  border-radius: 5px; /* Add rounded corners */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow effect */
+}
+
+h2 {
+  margin-bottom: 20px;
+}
+
+.download-button {
+  display: block;
+  padding: 10px 20px;
+  background-color: #c0392b; /* Red shade for download button */
+  color: #fff; /* White text for download button */
+  text-decoration: none; /* Remove underline */
+  border: none; /* Remove border */
+  border-radius: 5px; /* Add rounded corners */
+  cursor: pointer; /* Change cursor to pointer on hover */
+  margin-bottom: 15px;
+}
+
+.download-button:hover {
+  background-color: #a72e23; /* Darken button color on hover */
+}
+
+ul {
+  list-style: disc;
+  padding-left: 20px;
+  margin-bottom: 15px;
+}
+
+p {
+  line-height: 1.5; /* Increase line spacing for better readability */
+}
+
+footer {
+    background-color:#333;
+    color: white;
+    padding: 20px;
+}
