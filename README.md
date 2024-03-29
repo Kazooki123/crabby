@@ -46,6 +46,17 @@ output.print = Is the syntax for printing the hello world.
 
 ### We welcome contributions from the community. If you'd like to contribute to Crabby, please read our contributing guidelines
 
+## Contributors
+
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- prettier-ignore-start -->
+<!-- markdownlint-disable -->
+
+<!-- markdownlint-restore -->
+<!-- prettier-ignore-end -->
+
+<!-- ALL-CONTRIBUTORS-LIST:END -->
+
 ## License
 
 ### Crabby is open-source software licensed under GNU General Public License v3.0. See the LICENSE file for more details
