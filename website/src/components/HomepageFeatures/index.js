@@ -4,31 +4,29 @@ import styles from './styles.module.css';
 
 const FeatureList = [
   {
-    title: 'Easy to Use',
-    Svg: require('@site/static/img/undraw_docusaurus_mountain.svg').default,
+    title: 'Simplicity',
+    Svg: require('@site/static/img/crabbylogo.svg').default,
     description: (
       <>
-        Esse nisi occaecat et qui do duis. In veniam non nostrud aute eu ex amet quis nostrud in pariatur proident ipsum nisi. Non consectetur laborum fugiat mollit nulla labore dolore.
+        Crabby is designed with simplicity in mind. It's easy to learn and understand, making it perfect for beginners. Yet, it's powerful enough to handle complex tasks, making it a great choice for experienced developers as well.
       </>
     ),
   },
   {
-    title: 'Focus on What Matters',
-    Svg: require('@site/static/img/undraw_docusaurus_tree.svg').default,
+    title: 'Efficiency',
+    Svg: require('@site/static/img/crabbylogo.svg').default,
     description: (
       <>
-        Docusaurus lets you focus on your docs, and we&apos;ll do the chores. Go
-        ahead and move your docs into the <code>docs</code> directory.
+        Crabby is built for speed. It's optimized for performance, ensuring that your programs run as fast as possible. With Crabby, you can focus on writing great code, knowing that it will be executed efficiently.
       </>
     ),
   },
   {
-    title: 'Powered by React',
-    Svg: require('@site/static/img/undraw_docusaurus_react.svg').default,
+    title: 'Versatility',
+    Svg: require('@site/static/img/crabbylogo.svg').default,
     description: (
       <>
-        Extend or customize your website layout by reusing React. Docusaurus can
-        be extended while reusing the same header and footer.
+        <span> Crabby </span> is a versatile language. It supports multiple programming paradigms, allowing you to choose the best approach for each task. Whether you prefer procedural, object-oriented, or functional programming, Crabby has you covered.
       </>
     ),
   },
@@ -39,6 +37,7 @@ function Feature({Svg, title, description}) {
     <div className={clsx('col col--4')}>
       <div className="text--center">
         <Svg className={styles.featureSvg} role="img" />
+        <img src={styles.featureSvg}  alt="" />
       </div>
       <div className="text--center padding-horiz--md">
         <Heading as="h3">{title}</Heading>
