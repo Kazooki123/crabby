@@ -48,14 +48,11 @@ output.print = Is the syntax for printing the hello world.
 
 ## Contributors
 
-<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
-<!-- prettier-ignore-start -->
-<!-- markdownlint-disable -->
+Thanks to all the contributers!
 
-<!-- markdownlint-restore -->
-<!-- prettier-ignore-end -->
-
-<!-- ALL-CONTRIBUTORS-LIST:END -->
+<a href="https://github.com/Kazooki123/crabby/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=Kazooki123/crabby"/>
+</a>
 
 ## License
 
