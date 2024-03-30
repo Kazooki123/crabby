@@ -1,62 +1,68 @@
 body {
-    font-family: sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #222; /* Smoky black background */
-    color: #ddd; /* Light gray text */
+  font-family: sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #222; /* Smoky black background */
+  color: #ddd; /* Light gray text */
 }
 
 .header {
-    background-color: #c0392b; /* Red shade for header */
-    padding: 15px;
-    color: #fff; /* White text for header */
+  background-color: #c0392b; /* Red shade for header */
+  padding: 15px;
+  color: #fff; /* White text for header */
 }
 
 .github-star {
-    position: fixed;  /* This fixes the inner div at top right */
-    top: 0;
-    right: 0;
-    text-align: right;  /* Maintains right alignment */
+  position: fixed; /* This fixes the inner div at top right */
+  top: 0;
+  right: 0;
+  text-align: right; /* Maintains right alignment */
 }
 
 .container {
-    display: flex;
+  display: flex;
 }
 
 .sidebar {
-    width: 250px;
-    padding: 20px;
-    background-color: #333; /* Darker shade for sidebar */
+  width: 250px;
+  padding: 20px;
+  background-color: #333; /* Darker shade for sidebar */
 }
 
 .sidebar a {
-    color: #ddd;
-    text-decoration: none;
-    display: block;
-    margin-bottom: 10px;
+  color: #ddd;
+  text-decoration: none;
+  display: block;
+  margin-bottom: 10px;
 }
 
 .sidebar a:hover {
-    color: #fff;
+  color: #fff;
 }
 
 .content {
-    position: static;
-    flex: 1;
-    padding: 20px;
+  position: static;
+  flex: 1;
+  padding: 20px;
 }
 
 a {
-    text-decoration:none;
+  text-decoration: none;
 }
 
 h1,
 h2,
 h3 {
-    margin-bottom: 15px;
+  margin-bottom: 15px;
 }
 
 code {
-    background-color: #222;
-    padding: 5px;
+  background-color: #222;
+  padding: 5px;
+}
+
+footer {
+  background-color: black;
+  color: white;
+  padding: 20px;
 }
