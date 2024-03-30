@@ -49,6 +49,14 @@ output.print = Is the syntax for printing the hello world.
 
 ### We welcome contributions from the community. If you'd like to contribute to Crabby, please read our contributing guidelines
 
+## Contributors
+
+Thanks to all the contributers!
+
+<a href="https://github.com/Kazooki123/crabby/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=Kazooki123/crabby"/>
+</a>
+
 ## License
 
 ### Crabby is open-source software licensed under GNU General Public License v3.0. See the LICENSE file for more details
