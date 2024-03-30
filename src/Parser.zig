@@ -8,70 +8,63 @@ const Tokenizer = struct {
 
     // Function to get the next token
     pub fn nextToken(self: *Self) []const u8 {
-        while (self.index < self.source.len) {
-            const char = self.source[self.index];
-            switch (char) {
-                // Handle whitespace
-                if (std.ascii.isWhitespace(char)) {
+        // Skip whitespace
+        while (self.index < self.source.len and std.ascii.isWhitespace(self.source[self.index])) {
+            self.index += 1;
+        }
+
+        if (self.index >= self.source.len) return null;
+
+        const char = self.source[self.index];
+        switch (char) {
+            // Handle string literals
+            '"' => {
+                const start = self.index;
+                self.index += 1;
+                while (self.index < self.source.len and self.source[self.index] != '"') {
                     self.index += 1;
                 }
-
-                // Handle string literals
-                if (char == '"') {
-                    const start = self.index;
-                    self.index += 1;
-                    while (self.index < self.source.len and self.source[self.index] != '"') {
-                        self.index += 1;
-                    }
-                    if (self.index < self.source.len) {
-                        self.index += 1; // Skip the closing quote
-                        return self.source[start..self.index];
-                    } else {
-                        std.debug.print("Error: Unterminated string literal.\\n", .{});
-                        return null;
-                    }
-                }
-
-                // Handle semicolon
-                if (char == ';') {
-                    const start = self.index;
-                    self.index += 1;
+                if (self.index < self.source.len and self.source[self.index] == '"') {
+                    self.index += 1; // Skip the closing quote
                     return self.source[start..self.index];
+                } else {
+                    std.debug.print("Error: Unterminated string literal.\\n", .{});
+                    return null;
                 }
+            },
 
-                // Handle "boolean" keyword
+            // Handle semicolon
+            ';' => {
+                const start = self.index;
+                self.index += 1;
+                return self.source[start..self.index];
+            },
+
+            // Handle keywords
+            else => {
                 if (std.mem.startsWith(u8, self.source[self.index..], "boolean")) {
                     const start = self.index;
                     self.index += "boolean".len;
                     return self.source[start..self.index];
-                }
-
-                // Handle "var" keyword
-                if (std.mem.startsWith(u8, self.source[self.index..], "var")) {
+                } else if (std.mem.startsWith(u8, self.source[self.index..], "var")) {
                     const start = self.index;
                     self.index += "var".len;
                     return self.source[start..self.index];
-                }
-
-                // Handle "fun" keyword
-                if (std.mem.startsWith(u8, self.source[self.index..], "fun")) {
+                } else if (std.mem.startsWith(u8, self.source[self.index..], "fun")) {
                     const start = self.index;
                     self.index += "fun".len;
                     return self.source[start..self.index];
+                } else {
+                    // Handle other characters (error case)
+                    std.debug.print("Error: Unexpected character: '{}'.\\n", .{char});
+                    return null;
                 }
-
-                // Handle other characters (error case)
-                std.debug.print("Error: Unexpected character: '{}'.\\n", .{char});
-                return null;
             }
         }
-
-        // No more tokens
-        return null;
     }
 };
 
-pub fn main() void {
+pub fn main() !void {
     const allocator = std.heap.page_allocator;
     const file_path = "hello.cb"; // Change this to your actual file path
     const file = try std.fs.cwd().openFile(file_path, .{});
