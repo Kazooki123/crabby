@@ -8,13 +8,18 @@ import {themes as prismThemes} from 'prism-react-renderer';
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
+
   title: 'Crabby',
   tagline: 'Dinosaurs are cool',
   favicon: 'img/favicon.ico',
-  
+
+  // @ts-ignore
   title: 'Welcome to Crabby',
+  // @ts-ignore
   tagline: "The New Programming Langauge🦀",
+  // @ts-ignore
   favicon: 'img/crabbylogo.png',
+
 
   // Set the production url of your site here
   url: 'https://your-docusaurus-site.example.com',
@@ -74,6 +79,7 @@ const config = {
         logo: {
           alt: 'Crabby Logo',
           src: 'img/logo.svg',
+          // @ts-ignore
           src: 'img/crabbylogo.png',
         },
         items: [
