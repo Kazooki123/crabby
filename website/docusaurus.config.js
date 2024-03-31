@@ -10,11 +10,11 @@ import {themes as prismThemes} from 'prism-react-renderer';
 const config = {
 
   title: 'Crabby',
-  tagline: 'Dinosaurs are cool',
+  tagline: 'Crabby the programming language',
   favicon: 'img/favicon.ico',
 
   // @ts-ignore
-  title: 'Welcome to Crabby',
+  title: 'Welcome to Crabby:',
   // @ts-ignore
   tagline: "The New Programming Langauge🦀",
   // @ts-ignore
