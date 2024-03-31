@@ -5,11 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Crabby - The New Programming Language</title>
     <link rel="icon" type="image/png" href="../crabbylogo4.png" />
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/output.css" />
   </head>
-  <body>
-    <header class="header">
-      <h1>Crabby🦀: Guide & Docs</h1>
+  <body class="selection:bg-black selection:text-white transition-colors duration-300">
+    <header class="header flex">
+      <h1 class="text-3xl">Crabby🦀: Guide & Docs</h1>
+      <ul class="ms-10 flex justify-center items-center">
+        <li><a href="./download/pages/windows.html">Download For Windows</a></li>
+      </ul>
     </header>
     <div class="container">
       <div class="sidebar">
@@ -32,8 +36,14 @@
           />
         </div>
         <section id="intro">
-          <h2>Introduction</h2>
-          <p>
+          <h2
+            class="text-3xl capitalize mb-5 bg-red-800 p-4 ps-1 rounded-lg font-bold font-sans items-center justify-center flex selection:bg-black hover:bg-red-500 transition-colors duration-500"
+          >
+            INTRODUCTION
+          </h2>
+          <p
+            class="mb-3 font-extralight bg-red-600 p-5 rounded-lg transition-colors duration-200 font-mono hover:bg-red-900"
+          >
             Welcome to the world of Crabby, a revolutionary programming language
             made entirely in the <b>Zig</b> language, designed to meet the
             demands of the modern programming era. Crabby is not just another
@@ -41,15 +51,17 @@
             approach programming.
           </p>
           <p>
-            <b>Note:</b> Crabby isn't a fully functional programming language
-            yet. So that's why we need you to help us create crabby. I'm also
-            trying to create the download website for Crabby Which will be
-            released sooner.
+            <b><p class="text-2xl capitalize  mb-2 bg-red-800 ps-2 p-1 rounded-lg font-semibold  font-mono selection:bg-black hover:bg-red-600 transition-colors duration-500">NOTE</p>
+            </b><p class=" mb-3 font-extralight bg-red-600 p-5 rounded-lg transition-colors duration-200 font-sans hover:bg-slate-900"> Crabby isn't a fully
+            functional programming language yet. So that's why we need you to
+            help us create crabby. I'm also trying to create the download
+            website for Crabby Which will be released sooner.
+          </p>
           </p>
         </section>
         <section id="feature">
-          <h2>Features</h2>
-          <p>
+          <h2 class="bg-slate-800 p-2 rounded-lg flex items-center mb-2 justify-center font-bold text-3xl transition-colors duration-300 hover:bg-green-500 hover:text-black">Features</h2>
+          <p class="bg-red-500 first-letter:capitalize p-3 rounded-lg duration-200 hover:bg-zinc-800">
             Crabby is designed with simplicity in mind. It's easy to learn and
             understand, making it perfect for beginners. Yet, it's powerful
             enough to handle complex tasks, making it a great choice for
@@ -57,33 +69,46 @@
           </p>
         </section>
         <section id="examples">
-          <h2>Examples</h2>
-          <p>Here's a simple "Hello, World!" program written in Crabby:</p>
-          <code class="crabby"> // hello.cb ("cb" short for crabby) </code>
+          <h2 class="flex justify-center items-center bg-slate-950 mt-2 p-2 text-3xl rounded-md hover:bg-black">Examples</h2>
+          <div class="bg-orange-950 text-start p-1 mt-2 border-black border-2 rounded-md">
+          <p class="flex mt-2">Here's a simple "Hello, World!" program written in Crabby:</p>
+          <code class="crabby bg-transparent cursor-not-allowed text-sm">
+            > hello.cb ("cb" short for crabby)
+          </code>
+          
           <h3>hello.cb:</h3>
-          <code> output.print("Hello, World!"); </code>
-          <p><b>Notes:</b></p>
-          <p>output.print = Is the syntax for printing the hello world.</p>
+          <code>> output.print("Hello, World!"); </code>
+        </div>
+          <p class="text-2xl capitalize  mb-2 bg-gray-950 ps-2 p-1 rounded-lg font-semibold  font-mono selection:bg-black mt-2 hover:bg-red-600 transition-colors duration-500"><b>NOTES</b></p>
+          <p class=" mb-3 font-extralight bg-amber-950 p-5 rounded-lg transition-colors duration-200 font-sans hover:bg-slate-900">output.print = Is the syntax for printing the hello world.</p>
         </section>
 
         <!-- DOWNLOADS -->
 
         <section>
-            <h2>Downloads:</h2>
-
-            <h3>Windows🪟</h3>
-            <p>You can check the <a href="download/pages/windows.html">Download Page</a> to install Crabby for Windows!🦀</p>
+          <div class="">
+          <h2 class="flex items-center justify-center text-3xl bg-blue-500 rounded-sm">Downloads:</h2>
+          <div class="windows flex flex-col items-center justify-center text-2xl mt-2 bg-blue-600 rounded-md ">
+          <h3 class="font-para">Windows🪟</h3>
+          
+          <p>
+            You can check the
+            <a class="underline hover:underline-offset-4" href="download/pages/windows.html">Download Page</a> to install
+            Crabby for Windows!🦀
+          </p>
+          </div>
+          </div>
         </section>
 
-        <section id="contribute">
-          <h2>Contributing</h2>
+        <section id="contribute" class="p-2 mt-2 rounded-lg border-green-400 border-2 bg-slate-900 flex flex-col items-center justify-center">
+          <h2 class="text-2xl">Contributing</h2>
           <p>
             We welcome contributions from the community. If you'd like to
             contribute to Crabby, please read our
             <a href="contribute.html">contributing guidelines</a>
           </p>
         </section>
-        <section>
+        <section class="bg-black flex flex-col mt-2 p-2 rounded-md">
           <h2>License</h2>
           <p>
             Crabby is open-source software licensed under GNU General Public
@@ -94,7 +119,7 @@
             for more details
           </p>
         </section>
-        <section>
+        <section class="bg-black flex flex-col mt-2 p-2 rounded-md">
           <h2>Support</h2>
           <p>
             If you encounter any issues while using Crabby, or if you have any
@@ -106,8 +131,8 @@
     </div>
 
     <footer>
-        <h2>StarloExoliz - Founder </h2>
-        <p>© 2023 Crabby🦀. All rights reserved.</p>
+      <h2>StarloExoliz - Founder</h2>
+      <p>© 2023 Crabby🦀. All rights reserved.</p>
     </footer>
 
     <script>
