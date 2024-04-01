@@ -1,6 +1,6 @@
 # Crabby🦀: The New Programming Language of the Modern Programming Era
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-2-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 [![StarloSearch](https://avatars.githubusercontent.com/u/139462470?s=48&v=4)](https://github.com/Kazooki123/starlosearch.git)
@@ -68,6 +68,7 @@ Thanks goes to these wonderful people! 👨‍💻💻:
   <tbody>
     <tr>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/Satvik-2727"><img src="https://avatars.githubusercontent.com/u/87568817?v=4?s=100" width="100px;" alt="Mr.Coder"/><br /><sub><b>Mr.Coder</b></sub></a><br /><a href="https://github.com/Kazooki123/crabby/commits?author=Satvik-2727" title="Code">💻</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://tiramify.dev"><img src="https://avatars.githubusercontent.com/u/94789999?v=4?s=100" width="100px;" alt="Trnx"/><br /><sub><b>Trnx</b></sub></a><br /><a href="https://github.com/Kazooki123/crabby/commits?author=trnxdev" title="Code">💻</a></td>
     </tr>
   </tbody>
 </table>
