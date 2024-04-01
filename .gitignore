@@ -1,5 +1,4 @@
 test/
 .idea/
 zig-cache/
-.vscode/
 zig-out/

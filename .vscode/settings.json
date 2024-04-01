@@ -1,0 +1,6 @@
+{
+  "git.enableSmartCommit": true,
+  "editor.formatOnSave": true,
+  "editor.fontFamily": "Consolas, 'Courier New', monospace",
+  "terminal.integrated.fontFamily": "FiraCode Nerd Font"
+}
