@@ -68,6 +68,8 @@ Thanks goes to these wonderful people! 👨‍💻💻:
   <tbody>
     <tr>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/Satvik-2727"><img src="https://avatars.githubusercontent.com/u/87568817?v=4?s=100" width="100px;" alt="Mr.Coder"/><br /><sub><b>Mr.Coder</b></sub></a><br /><a href="https://github.com/Kazooki123/crabby/commits?author=Satvik-2727" title="Code">💻</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/Scarleyegaming"><img src="https://avatars.githubusercontent.com/u/93965392?v=4?s=100" width="100px;" alt="Saturo"/><br /><sub><b>Saturo</b></sub></a><br /><a href="https://github.com/Kazooki123/crabby/commits?author=Scarleyegaming" title="Code">💻</a></td>
+
       <td align="center" valign="top" width="14.28%"><a href="https://tiramify.dev"><img src="https://avatars.githubusercontent.com/u/94789999?v=4?s=100" width="100px;" alt="Trnx"/><br /><sub><b>Trnx</b></sub></a><br /><a href="https://github.com/Kazooki123/crabby/commits?author=trnxdev" title="Code">💻</a></td>
     </tr>
   </tbody>
