@@ -1,1 +1,3 @@
+import 'output' from 'std';
+
 output.print("Hello World");
