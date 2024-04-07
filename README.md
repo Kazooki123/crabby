@@ -45,6 +45,10 @@ output.print("Hello, World!");
 
 output.print = Is the syntax for printing the hello world.
 
+# Docs
+
+You can visit the docs by vising the <a href="https://crabby-docs.vercel.app/">Crabby Docs</a> website!🦀
+
 ## Contributing
 
 ### We welcome contributions from the community. If you'd like to contribute to Crabby, please read our contributing guidelines
