@@ -38,7 +38,7 @@ Here's a simple "Hello, World!" program written in Crabby:
 
 ```crabby
 // hello.cb ("cb" short for crabby)
-output.print("Hello, World!");
+print "Hello, World!"
 ```
 
 ### Notes
