@@ -1,1 +1,1 @@
-print "Hello, Crabby!"
+output.print("Hello, Crabby!");
