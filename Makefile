@@ -24,8 +24,8 @@ all: $(BIN_DIR)/crabby$(EXE_EXT)
 $(BIN_DIR)/crabby$(EXE_EXT): $(OBJS)
 	$(CC) -o $@ $^
 
-$(OBJ_DIR)/%.o: $(CFILES) $(HFILES)
-	$(CC) $(FLAGS) -c -o $@ $<
+$(OBJ_DIR)/%.o: $(CFILES)
+	$(CC) $(FLAGS) -c $^
 
 clean: 
 	rm $(OBJ_DIR)/*.o
