@@ -7,36 +7,39 @@
 #include <string.h>
 
 // Token types
-typedef enum {
+typedef enum
+{
     TOKEN_PRINT,
     TOKEN_STRING,
     TOKEN_EOF
 } TokenType;
 
 // Token structure
-typedef struct {
+typedef struct
+{
     TokenType type;
-    char* value;
+    char *value;
 } Token;
 
 // Lexer structure
-typedef struct {
-    const char* input;
+typedef struct
+{
+    const char *input;
     int position;
     int read_position;
     char ch;
 } Lexer;
 
 // Function declarations
-Lexer* new_lexer(const char* input);
-Token* next_token(Lexer* lexer);
-void print_token(Token* token);
-void free_token(Token* token);
+Lexer *new_lexer(const char *input);
+Token *next_token(Lexer *lexer);
+void print_token(Token *token);
+void free_token(Token *token);
 
 // Interpreter function
-void interpret(const char* input);
+void interpret(const char *input);
 
 // New function declaration
-char* read_file(const char* filename);
+char *read_file(const char *filename);
 
 #endif // CRABBY_H
