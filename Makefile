@@ -7,7 +7,6 @@ BIN_DIR=./bin
 
 CFILES=$(wildcard $(SRC_DIR)/*.c)
 HFILES=$(wildcard $(SRC_DIR)/*.h)
-OBJS=$(patsubst $(SRC_DIR)/%.c,$(OBJ_DIR)/%.o,$(CFILES))
 
 FLAGS=-Wall
 
@@ -21,11 +20,8 @@ endif
 
 all: $(BIN_DIR)/crabby$(EXE_EXT)
 
-$(BIN_DIR)/crabby$(EXE_EXT): $(OBJS)
+$(BIN_DIR)/crabby$(EXE_EXT): $(CFILES)
 	$(CC) -o $@ $^
-
-$(OBJ_DIR)/%.o: $(CFILES)
-	$(CC) $(FLAGS) -c $^
 
 clean: 
 	rm $(OBJ_DIR)/*.o
