@@ -3,7 +3,7 @@
 [![All Contributors](https://img.shields.io/badge/all_contributors-2-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
-[![StarloSearch](https://avatars.githubusercontent.com/u/139462470?s=48&v=4)]
+![StarloSearch](https://avatars.githubusercontent.com/u/139462470?s=48&v=4)
 
 ![GitHub License](https://img.shields.io/github/license/Kazooki123/crabby?style=for-the-badge&logo=gnu&logoColor=%23A42E2B)
 
