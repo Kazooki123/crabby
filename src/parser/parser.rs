@@ -47,7 +47,7 @@ impl<'a> Parser<'a> {
     /// Parses a function definition: def name(params): { body }
     fn parse_function_definition(&mut self) -> Result<Statement, CrabbyError> {
         self.advance(); // consume 'def'
-        
+
         // Parse function name
         let name = if let Token::Identifier(name) = &self.peek().token {
             name.clone()
@@ -59,7 +59,7 @@ impl<'a> Parser<'a> {
         // Parse parameters
         self.consume(Token::LParen, "Expected '(' after function name")?;
         let mut params = Vec::new();
-        
+
         if !matches!(self.peek().token, Token::RParen) {
             loop {
                 if let Token::Identifier(param) = &self.peek().token {
@@ -91,7 +91,7 @@ impl<'a> Parser<'a> {
     /// Parses a let statement: let name = expression
     fn parse_let_statement(&mut self) -> Result<Statement, CrabbyError> {
         self.advance(); // consume 'let'
-        
+
         let name = if let Token::Identifier(name) = &self.peek().token {
             name.clone()
         } else {
@@ -113,9 +113,9 @@ impl<'a> Parser<'a> {
         self.advance(); // consume 'if'
         let condition = self.parse_expression()?;
         self.consume(Token::Colon, "Expected ':' after if condition")?;
-        
+
         let then_branch = self.parse_block()?;
-        
+
         let else_branch = if matches!(self.peek().token, Token::Else) {
             self.advance(); // consume 'else'
             self.consume(Token::Colon, "Expected ':' after else")?;
@@ -147,12 +147,12 @@ impl<'a> Parser<'a> {
     /// Parses a block of statements: { statement* }
     fn parse_block(&mut self) -> Result<Statement, CrabbyError> {
         self.consume(Token::LBrace, "Expected '{' at start of block")?;
-        
+
         let mut statements = Vec::new();
         while !matches!(self.peek().token, Token::RBrace) && !self.is_at_end() {
             statements.push(self.parse_statement()?);
         }
-        
+
         self.consume(Token::RBrace, "Expected '}' at end of block")?;
         Ok(Statement::Block(statements))
     }
@@ -166,8 +166,9 @@ impl<'a> Parser<'a> {
     fn parse_binary_expression(&mut self) -> Result<Expression, CrabbyError> {
         let mut expr = self.parse_primary()?;
 
-        while matches!(self.peek().token, 
-            Token::Plus | Token::Minus | Token::Star | Token::Slash | Token::DoubleEquals
+        while matches!(self.peek().token,
+            Token::Plus | Token::Minus | Token::Star | Token::Slash | Token::DoubleEquals |
+            Token::Dot
         ) {
             let operator = match self.peek().token {
                 Token::Plus => BinaryOp::Add,
@@ -175,6 +176,7 @@ impl<'a> Parser<'a> {
                 Token::Star => BinaryOp::Mul,
                 Token::Slash => BinaryOp::Div,
                 Token::DoubleEquals => BinaryOp::Eq,
+                Token::Dot => BinaryOp::Dot,
                 _ => unreachable!(),
             };
             self.advance();
@@ -217,7 +219,7 @@ impl<'a> Parser<'a> {
     /// Parses a function call: name(args)
     fn parse_function_call(&mut self, name: String) -> Result<Expression, CrabbyError> {
         self.advance(); // consume '('
-        
+
         let mut arguments = Vec::new();
         if !matches!(self.peek().token, Token::RParen) {
             loop {
@@ -228,9 +230,9 @@ impl<'a> Parser<'a> {
                 self.advance(); // consume ','
             }
         }
-        
+
         self.consume(Token::RParen, "Expected ')' after arguments")?;
-        
+
         Ok(Expression::Call {
             function: name,
             arguments,
@@ -240,9 +242,9 @@ impl<'a> Parser<'a> {
     /// Parses a lambda expression: lambda(params): { body }
     fn parse_lambda(&mut self) -> Result<Expression, CrabbyError> {
         self.advance(); // consume 'lambda'
-        
+
         self.consume(Token::LParen, "Expected '(' after lambda")?;
-        
+
         let mut params = Vec::new();
         if !matches!(self.peek().token, Token::RParen) {
             loop {
@@ -250,19 +252,19 @@ impl<'a> Parser<'a> {
                     params.push(name.clone());
                     self.advance();
                 }
-                
+
                 if !matches!(self.peek().token, Token::Comma) {
                     break;
                 }
                 self.advance(); // consume ','
             }
         }
-        
+
         self.consume(Token::RParen, "Expected ')' after lambda parameters")?;
         self.consume(Token::Colon, "Expected ':' after lambda parameters")?;
-        
+
         let body = self.parse_block()?;
-        
+
         Ok(Expression::Lambda {
             params,
             body: Box::new(body),
@@ -293,7 +295,7 @@ impl<'a> Parser<'a> {
         if self.is_at_end() {
             return Err(self.error(&format!("Unexpected end of file. {}", message)));
         }
-        
+
         if self.peek().token == expected {
             self.advance();
             Ok(())
@@ -308,7 +310,7 @@ impl<'a> Parser<'a> {
         } else {
             &self.peek().span
         };
-        
+
         CrabbyError::ParserError {
             line: span.line,
             column: span.column,

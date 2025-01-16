@@ -22,10 +22,10 @@ pub enum Token {
     // Literals
     #[regex(r"[0-9]+", |lex| lex.slice().parse::<i64>().ok())]
     Integer(i64),
-    
+
     #[regex(r#""[^"]*""#, |lex| Some(lex.slice().trim_matches('"').to_string()))]
     String(String),
-    
+
     #[regex(r"[a-zA-Z_][a-zA-Z0-9_]*", |lex| Some(lex.slice().to_string()))]
     Identifier(String),
 
@@ -79,7 +79,7 @@ pub fn tokenize(source: &str) -> Result<Vec<TokenStream>, CrabbyError> {
 
     while let Some(token_result) = lex.next() {
         let span_start = lex.span().start;
-        
+
         // Update line and column for any skipped whitespace
         for (_pos, ch) in source[last_valid_pos..span_start].chars().enumerate() {
             if ch == '\n' {
@@ -120,7 +120,7 @@ pub fn tokenize(source: &str) -> Result<Vec<TokenStream>, CrabbyError> {
                     let problem_char = source[span_start..].chars().next()
                         .map(|c| format!("'{}'", c))
                         .unwrap_or_else(|| "unknown".to_string());
-                    
+
                     return Err(CrabbyError::LexerError {
                         line,
                         column,

@@ -42,7 +42,7 @@ impl Compiler {
             params: vec!["value".to_string()],
             body: Box::new(Statement::Expression(Expression::Variable("value".to_string()))),
         });
-        
+
         compiler
     }
 
@@ -50,7 +50,7 @@ impl Compiler {
         if args.len() != 1 {
             return Err(CrabbyError::CompileError("print takes exactly one argument".to_string()));
         }
-        
+
         let value = self.compile_expression(&args[0])?;
         println!("{}", value.to_string());
         Ok(Value::Integer(0))
@@ -128,7 +128,7 @@ impl Compiler {
                 if function == "print" {
                     return self.handle_print(arguments);
                 }
-            
+
                 let func = self.functions.get(function).cloned().ok_or_else(|| {
                     CrabbyError::CompileError(format!("Undefined function: {}", function))
                 })?;
@@ -163,7 +163,7 @@ impl Compiler {
             Expression::Binary { left, operator, right } => {
                 let left_val = self.compile_expression(left)?;
                 let right_val = self.compile_expression(right)?;
-            
+
                 match (left_val, operator, right_val) {
                     (Value::Integer(l), BinaryOp::Add, Value::Integer(r)) => Ok(Value::Integer(l + r)),
                     (Value::String(l), BinaryOp::Add, Value::String(r)) => Ok(Value::String(format!("{}{}", l, r))),
@@ -180,6 +180,7 @@ impl Compiler {
                     (Value::Integer(l), BinaryOp::Eq, Value::Integer(r)) => {
                         Ok(Value::Integer(if l == r { 1 } else { 0 }))
                     }
+                    (Value::String(l), BinaryOp::Dot, Value::String(r)) => Ok(Value::String(format!("{}.{}", l, r))),
                     _ => Err(CrabbyError::CompileError("Invalid operation".to_string())),
                 }
             }
