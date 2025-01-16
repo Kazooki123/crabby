@@ -1,0 +1,9 @@
+// if-else statements
+
+let true = 1
+
+if true: {
+    print("True!")
+} else {
+    print("Nope!")
+}

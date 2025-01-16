@@ -20,7 +20,10 @@ pub enum Token {
     Lambda,
 
     // Literals
-    #[regex(r"[0-9]+", |lex| lex.slice().parse::<i64>().ok())]
+    #[regex(r"-?[0-9]+\.[0-9]+", |lex| lex.slice().parse::<f64>().ok())]
+    Float(f64),
+
+    #[regex(r"-?[0-9]+", |lex| lex.slice().parse::<i64>().ok())]
     Integer(i64),
 
     #[regex(r#""[^"]*""#, |lex| Some(lex.slice().trim_matches('"').to_string()))]

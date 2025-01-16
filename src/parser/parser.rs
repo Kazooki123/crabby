@@ -118,7 +118,6 @@ impl<'a> Parser<'a> {
 
         let else_branch = if matches!(self.peek().token, Token::Else) {
             self.advance(); // consume 'else'
-            self.consume(Token::Colon, "Expected ':' after else")?;
             Some(Box::new(self.parse_block()?))
         } else {
             None
@@ -199,6 +198,10 @@ impl<'a> Parser<'a> {
             Token::Integer(n) => {
                 self.advance();
                 Ok(Expression::Integer(n))
+            }
+            Token::Float(f) => {
+                self.advance();
+                Ok(Expression::Float(f))
             }
             Token::String(s) => {
                 self.advance();

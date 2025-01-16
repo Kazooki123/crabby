@@ -39,6 +39,7 @@ pub enum Statement {
 #[derive(Debug, Clone)]
 pub enum Expression {
     Integer(i64),
+    Float(f64),
     String(String),
     Variable(String),
     Binary {

@@ -10,6 +10,7 @@ pub struct Compiler {
 #[derive(Clone)]
 enum Value {
     Integer(i64),
+    Float(f64),
     String(String),
     Lambda(Function),
 }
@@ -18,6 +19,7 @@ impl Value {
     fn to_string(&self) -> String {
         match self {
             Value::Integer(n) => n.to_string(),
+            Value::Float(f) => f.to_string(),
             Value::String(s) => s.clone(),
             Value::Lambda(_) => "<lambda>".to_string(),
         }
@@ -124,6 +126,14 @@ impl Compiler {
 
     fn compile_expression(&mut self, expression: &Expression) -> Result<Value, CrabbyError> {
         match expression {
+            Expression::Integer(n) => Ok(Value::Integer(*n)),
+            Expression::Float(f) => Ok(Value::Float(*f)),
+            Expression::String(s) => Ok(Value::String(s.clone())),
+            Expression::Variable(name) => {
+                self.variables.get(name).cloned().ok_or_else(|| {
+                    CrabbyError::CompileError(format!("Undefined variable: {}", name))
+                })
+            },
             Expression::Call { function, arguments } => {
                 if function == "print" {
                     return self.handle_print(arguments);
@@ -152,23 +162,20 @@ impl Compiler {
                     Some(value) => Ok(value),
                     None => Ok(Value::Integer(0)),
                 }
-            }
-            Expression::Integer(n) => Ok(Value::Integer(*n)),
-            Expression::String(s) => Ok(Value::String(s.clone())),
-            Expression::Variable(name) => {
-                self.variables.get(name).cloned().ok_or_else(|| {
-                    CrabbyError::CompileError(format!("Undefined variable: {}", name))
-                })
-            }
+            },
+            Expression::Lambda { params, body } => {
+                Ok(Value::Lambda(Function {
+                    params: params.clone(),
+                    body: body.clone(),
+                }))
+            },
             Expression::Binary { left, operator, right } => {
                 let left_val = self.compile_expression(left)?;
                 let right_val = self.compile_expression(right)?;
 
                 match (left_val, operator, right_val) {
+                    // Integer operations
                     (Value::Integer(l), BinaryOp::Add, Value::Integer(r)) => Ok(Value::Integer(l + r)),
-                    (Value::String(l), BinaryOp::Add, Value::String(r)) => Ok(Value::String(format!("{}{}", l, r))),
-                    (Value::String(l), BinaryOp::Add, r) => Ok(Value::String(format!("{}{}", l, r.to_string()))),
-                    (l, BinaryOp::Add, Value::String(r)) => Ok(Value::String(format!("{}{}", l.to_string(), r))),
                     (Value::Integer(l), BinaryOp::Sub, Value::Integer(r)) => Ok(Value::Integer(l - r)),
                     (Value::Integer(l), BinaryOp::Mul, Value::Integer(r)) => Ok(Value::Integer(l * r)),
                     (Value::Integer(l), BinaryOp::Div, Value::Integer(r)) => {
@@ -177,18 +184,61 @@ impl Compiler {
                         }
                         Ok(Value::Integer(l / r))
                     }
-                    (Value::Integer(l), BinaryOp::Eq, Value::Integer(r)) => {
-                        Ok(Value::Integer(if l == r { 1 } else { 0 }))
+
+                    // Float operations
+                    (Value::Float(l), BinaryOp::Add, Value::Float(r)) => Ok(Value::Float(l + r)),
+                    (Value::Float(l), BinaryOp::Sub, Value::Float(r)) => Ok(Value::Float(l - r)),
+                    (Value::Float(l), BinaryOp::Mul, Value::Float(r)) => Ok(Value::Float(l * r)),
+                    (Value::Float(l), BinaryOp::Div, Value::Float(r)) => {
+                        if r == 0.0 {
+                            return Err(CrabbyError::CompileError("Division by zero".to_string()));
+                        }
+                        Ok(Value::Float(l / r))
                     }
+
+                    // Mixed Integer and Float operations
+                    (Value::Integer(l), op, Value::Float(r)) => {
+                        let l = l as f64;
+                        match op {
+                            BinaryOp::Add => Ok(Value::Float(l + r)),
+                            BinaryOp::Sub => Ok(Value::Float(l - r)),
+                            BinaryOp::Mul => Ok(Value::Float(l * r)),
+                            BinaryOp::Div => {
+                                if r == 0.0 {
+                                    return Err(CrabbyError::CompileError("Division by zero".to_string()));
+                                }
+                                Ok(Value::Float(l / r))
+                            }
+                            BinaryOp::Eq => Ok(Value::Integer(if (l - r).abs() < f64::EPSILON { 1 } else { 0 })),
+                            BinaryOp::Dot => Err(CrabbyError::CompileError("Cannot use dot operator with numbers".to_string())),
+                        }
+                    }
+
+                    (Value::Float(l), op, Value::Integer(r)) => {
+                        let r = r as f64;
+                        match op {
+                            BinaryOp::Add => Ok(Value::Float(l + r)),
+                            BinaryOp::Sub => Ok(Value::Float(l - r)),
+                            BinaryOp::Mul => Ok(Value::Float(l * r)),
+                            BinaryOp::Div => {
+                                if r == 0.0 {
+                                    return Err(CrabbyError::CompileError("Division by zero".to_string()));
+                                }
+                                Ok(Value::Float(l / r))
+                            }
+                            BinaryOp::Eq => Ok(Value::Integer(if (l - r).abs() < f64::EPSILON { 1 } else { 0 })),
+                            BinaryOp::Dot => Err(CrabbyError::CompileError("Cannot use dot operator with numbers".to_string())),
+                        }
+                    }
+
+                    // String operations
+                    (Value::String(l), BinaryOp::Add, Value::String(r)) => Ok(Value::String(format!("{}{}", l, r))),
                     (Value::String(l), BinaryOp::Dot, Value::String(r)) => Ok(Value::String(format!("{}.{}", l, r))),
+                    (Value::String(l), BinaryOp::Add, r) => Ok(Value::String(format!("{}{}", l, r.to_string()))),
+                    (l, BinaryOp::Add, Value::String(r)) => Ok(Value::String(format!("{}{}", l.to_string(), r))),
+
                     _ => Err(CrabbyError::CompileError("Invalid operation".to_string())),
                 }
-            }
-            Expression::Lambda { params, body } => {
-                Ok(Value::Lambda(Function {
-                    params: params.clone(),
-                    body: body.clone(),
-                }))
             }
         }
     }
