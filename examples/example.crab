@@ -1,2 +1,7 @@
-// example.crab
-print("Hello, World!")
+let x = 42
+let y = 314
+let message = "Hello, Crabby!"
+
+print(x)
+print(y)
+print(message)

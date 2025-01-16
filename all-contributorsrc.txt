@@ -1,0 +1,39 @@
+{
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": false,
+  "commitType": "docs",
+  "commitConvention": "angular",
+  "contributors": [
+    {
+      "login": "Satvik-2727",
+      "name": "Mr.Coder",
+      "avatar_url": "https://avatars.githubusercontent.com/u/87568817?v=4",
+      "profile": "https://github.com/Satvik-2727",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "Scarleyegaming",
+      "name": "Saturo",
+      "avatar_url": "https://avatars.githubusercontent.com/u/93965392?v=4",
+      "profile": "https://github.com/Scarleyegaming",
+      "login": "trnxdev",
+      "name": "Trnx",
+      "avatar_url": "https://avatars.githubusercontent.com/u/94789999?v=4",
+      "profile": "https://tiramify.dev",
+      "contributions": [
+        "code"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7,
+  "skipCi": true,
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "projectName": "crabby",
+  "projectOwner": "Kazooki123"
+}
