@@ -39,13 +39,32 @@ impl Compiler {
             functions: HashMap::new(),
         };
 
-        // Add built-in print function
         compiler.functions.insert("print".to_string(), Function {
             params: vec!["value".to_string()],
             body: Box::new(Statement::Expression(Expression::Variable("value".to_string()))),
         });
 
         compiler
+    }
+
+    fn handle_lambda_call(&mut self, lambda: Function, arguments: &[Expression]) -> Result<Value, CrabbyError> {
+        if arguments.len() != lambda.params.len() {
+            return Err(CrabbyError::CompileError(format!(
+                "Lambda expects {} arguments, got {}",
+                lambda.params.len(),
+                arguments.len()
+            )));
+        }
+
+        for (param, arg) in lambda.params.iter().zip(arguments) {
+            let arg_value = self.compile_expression(arg)?;
+            self.variables.insert(param.clone(), arg_value);
+        }
+
+        match self.compile_statement(&lambda.body)? {
+            Some(value) => Ok(value),
+            None => Ok(Value::Integer(0)),
+        }
     }
 
     fn handle_print(&mut self, args: &[Expression]) -> Result<Value, CrabbyError> {
@@ -137,6 +156,10 @@ impl Compiler {
             Expression::Call { function, arguments } => {
                 if function == "print" {
                     return self.handle_print(arguments);
+                }
+
+                if let Some(Value::Lambda(lambda)) = self.variables.get(function) {
+                    return self.handle_lambda_call(lambda.clone(), arguments);
                 }
 
                 let func = self.functions.get(function).cloned().ok_or_else(|| {
