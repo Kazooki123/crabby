@@ -168,19 +168,36 @@ impl Compiler {
     }
 
     fn resolve_path(&self, current_file: &Path, import_path: &str) -> PathBuf {
-        if import_path.starts_with("./") || import_path.starts_with("../") {
-            current_file.parent().unwrap().join(import_path)
+        if let Some(current_dir) = current_file.parent() {
+            if import_path.starts_with("./") {
+                // Handle explicit relative path
+                current_dir.join(&import_path[2..])
+            } else if import_path.starts_with("../") {
+                // Handle parent directory reference
+                current_dir.join(import_path)
+            } else {
+                // Handle implicit relative path
+                current_dir.join(import_path)
+            }
         } else {
+            // Fallback to current directory if no parent
             PathBuf::from(import_path)
         }
     }
 
-    fn load_module(&mut self, current_file: &Path, _name: &str, source: &str) -> Result<(), CrabbyError> {
-        let path = self.resolve_path(current_file, source);
+    fn load_module(&mut self, current_file: &Path, name: &str, source: &str) -> Result<(), CrabbyError> {
+        let resolved_path = self.resolve_path(current_file, source);
+
+        println!("Trying to load: {}", resolved_path.display());
         
-        // Reads the source file
-        let source_code = fs::read_to_string(&path).map_err(|e| {
-            CrabbyError::CompileError(format!("Failed to read module '{}': {}", source, e))
+        // Try to read the source file
+        let source_code = fs::read_to_string(&resolved_path).map_err(|e| {
+            CrabbyError::CompileError(format!(
+                "Failed to read module '{}': {} (resolved path: {})", 
+                source, 
+                e,
+                resolved_path.display()
+            ))
         })?;
 
         // Tokenizes and parses the imported file
@@ -188,17 +205,12 @@ impl Compiler {
         let ast = parse(tokens)?;
 
         // Creates a new compiler instance for the module
-        let mut module_compiler = Compiler::new(Some(path.clone()));
-        
-        // Then compiles the module
+        let mut module_compiler = Compiler::new(Some(resolved_path));
         module_compiler.compile(&ast)?;
-
+    
         // Only exposes public functions
-        for (func_name, func) in module_compiler.functions {
-            if func_name.starts_with("pub ") {
-                let public_name = func_name.trim_start_matches("pub ");
-                self.functions.insert(format!("{}", public_name), func);
-            }
+        for (name, value) in module_compiler.module.public_items {
+            self.variables.insert(name, value);
         }
 
         Ok(())
@@ -226,7 +238,7 @@ impl Compiler {
                 }
 
                 self.functions.insert(func_name, function);
-                
+
                 Ok(None)
             }
             Statement::Let { name, value } => {
@@ -248,7 +260,7 @@ impl Compiler {
 
                 // Always add to variables for local use
                 self.variables.insert(var_name, compiled_value);
-                
+
                 Ok(None)
             }
             Statement::Return(expr) => {
@@ -282,7 +294,7 @@ impl Compiler {
                 if let Some(source_path) = source {
                     // Create a new compiler instance for the imported module
                     let mut module_compiler = Compiler::new(Some(PathBuf::from(source_path)));
-                    
+
                     // Load and compile the module
                     let path = Path::new(source_path);
                     let source_code = fs::read_to_string(path).map_err(|e| {
@@ -487,9 +499,4 @@ impl Compiler {
             }
         }
     }
-}
-
-pub fn compile(ast: &Program) -> Result<(), CrabbyError> {
-    let mut compiler = Compiler::new(None);
-    compiler.compile(ast)
 }
