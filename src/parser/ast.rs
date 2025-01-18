@@ -32,6 +32,19 @@ pub enum Statement {
         condition: Box<Expression>,
         body: Box<Statement>,
     },
+    Loop {
+        count: Box<Expression>,
+        body: Box<Statement>,
+    },
+    ForIn {
+        variable: String,
+        iterator: Box<Expression>,
+        body: Box<Statement>,
+    },
+    Import {
+        name: String,
+        source: Option<String>,
+    },
     Block(Vec<Statement>),
     Expression(Expression),
 }
@@ -42,6 +55,7 @@ pub enum Expression {
     Float(f64),
     String(String),
     Variable(String),
+    Range(Box<Expression>),
     Binary {
         left: Box<Expression>,
         operator: BinaryOp,

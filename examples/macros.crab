@@ -1,0 +1,5 @@
+// Macro scripting in Crabby
+
+macro {
+    // ... does something here
+}

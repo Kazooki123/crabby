@@ -18,6 +18,26 @@ pub enum Token {
     Let,
     #[token("lambda")]
     Lambda,
+    #[token("loop")]
+    Loop,
+    #[token("for")]
+    For,
+    #[token("in")]
+    In,
+    #[token("range")]
+    Range,
+    #[token("macro")]
+    Macro,
+    // #[token("match")]
+    // Match,
+    // #[token("elseif")]
+    // Elseif,
+    #[token("import")]
+    Import,
+    #[token("from")]
+    From,
+    #[token("pub")]
+    Public,
 
     // Literals
     #[regex(r"-?[0-9]+\.[0-9]+", |lex| lex.slice().parse::<f64>().ok())]
@@ -43,6 +63,26 @@ pub enum Token {
     Slash,
     #[token("=")]
     Equals,
+    #[token("$")]
+    DollarSign,
+    #[token("!=")]
+    NotEquals,
+    #[token("<")]
+    LessThan,
+    #[token(">")]
+    GreaterThan,
+    #[token("<=")]
+    LessThanOrEqual,
+    #[token(">=")]
+    GreaterThanOrEqual,
+    #[token("&&")]
+    And,
+    #[token("||")]
+    Or,
+    #[token("!")]
+    Not,
+    #[token("@")]
+    Decorator,
     #[token("==")]
     DoubleEquals,
     #[token("(")]
@@ -119,7 +159,6 @@ pub fn tokenize(source: &str) -> Result<Vec<TokenStream>, CrabbyError> {
             }
             Err(_) => {
                 if last_valid_pos < source.len() {
-                    // Try to get the problematic character for better error messages
                     let problem_char = source[span_start..].chars().next()
                         .map(|c| format!("'{}'", c))
                         .unwrap_or_else(|| "unknown".to_string());

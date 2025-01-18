@@ -25,6 +25,9 @@ impl<'a> Parser<'a> {
 
     fn parse_statement(&mut self) -> Result<Statement, CrabbyError> {
         match &self.peek().token {
+            Token::Loop => self.parse_loop_statement(),
+            Token::For => self.parse_for_statement(),
+            Token::Import => self.parse_import_statement(),
             Token::Def => self.parse_function_definition(),
             Token::Let => self.parse_let_statement(),
             Token::Return => {
@@ -52,7 +55,7 @@ impl<'a> Parser<'a> {
         self.advance();
 
         self.consume(&Token::LParen, "Expected '(' after function name")?;
-        
+
         let mut params = Vec::new();
         if !matches!(self.peek().token, Token::RParen) {
             loop {
@@ -79,6 +82,14 @@ impl<'a> Parser<'a> {
             params,
             body: Box::new(body),
         })
+    }
+
+    // fn parse_match_statement() {
+    //    // ...
+    // }
+
+    fn parse_macro_statement() {
+        // ...
     }
 
     fn parse_if_statement(&mut self) -> Result<Statement, CrabbyError> {
@@ -188,10 +199,17 @@ impl<'a> Parser<'a> {
                     Ok(Expression::Variable(name))
                 }
             }
+            Token::Range => {
+                self.advance(); // consume 'range'
+                self.consume(&Token::LParen, "Expected '(' after 'range'")?;
+                let count = self.parse_expression()?;
+                self.consume(&Token::RParen, "Expected ')' after range count")?;
+                Ok(Expression::Range(Box::new(count)))
+            }
             Token::Lambda => {
                 self.advance(); // consume 'lambda'
                 self.consume(&Token::LParen, "Expected '(' after lambda")?;
-                
+
                 let mut params = Vec::new();
                 if !matches!(self.peek().token, Token::RParen) {
                     loop {
@@ -245,6 +263,69 @@ impl<'a> Parser<'a> {
             name,
             value: Box::new(value),
         })
+    }
+
+    fn parse_loop_statement(&mut self) -> Result<Statement, CrabbyError> {
+        self.advance(); // consume 'loop'
+        
+        let count = self.parse_expression()?;
+        
+        self.consume(&Token::Colon, "Expected ':' after loop count")?;
+        let body = self.parse_block()?;
+
+        Ok(Statement::Loop {
+            count: Box::new(count),
+            body: Box::new(body),
+        })
+    }
+
+    fn parse_for_statement(&mut self) -> Result<Statement, CrabbyError> {
+        self.advance(); // consume 'for'
+        
+        let variable = if let Token::Identifier(name) = &self.peek().token {
+            name.clone()
+        } else {
+            return Err(self.error("Expected variable name after 'for'"));
+        };
+        self.advance();
+
+        self.consume(&Token::In, "Expected 'in' after variable name")?;
+        
+        let iterator = self.parse_expression()?;
+        
+        self.consume(&Token::Colon, "Expected ':' after iterator expression")?;
+        let body = self.parse_block()?;
+
+        Ok(Statement::ForIn {
+            variable,
+            iterator: Box::new(iterator),
+            body: Box::new(body),
+        })
+    }
+
+    fn parse_import_statement(&mut self) -> Result<Statement, CrabbyError> {
+        self.advance(); // consume 'import'
+    
+        let name = if let Token::Identifier(name) = &self.peek().token {
+            name.clone()
+        } else {
+            return Err(self.error("Expected module name after 'import'"));
+        };
+        self.advance();
+
+        let source = if matches!(self.peek().token, Token::From) {
+            self.advance(); // consume 'from'
+            if let Token::String(path) = &self.peek().token {
+                Some(path.clone())
+            } else {
+                return Err(self.error("Expected string literal after 'from'"));
+            }
+        } else {
+            None
+        };
+        self.advance();
+
+        Ok(Statement::Import { name, source })
     }
 
     fn parse_function_call(&mut self, name: String) -> Result<Expression, CrabbyError> {

@@ -3,3 +3,5 @@
 **/*.swp
 Cargo.lock
 *.log
+/vscode-extension/
+.vscode/
