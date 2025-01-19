@@ -6,7 +6,7 @@ keywords = ["language", "python", "programming-language", "modern"]
 version = "0.1.0"
 repository = "https://github.com/Kazooki123/crabby"
 edition = "2024"
-license = "MIT"
+license = "GPL-3.0-only"
 
 [dependencies]
 logos = "0.13"

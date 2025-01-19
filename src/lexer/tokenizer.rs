@@ -28,10 +28,10 @@ pub enum Token {
     Range,
     #[token("macro")]
     Macro,
-    // #[token("match")]
-    // Match,
-    // #[token("elseif")]
-    // Elseif,
+    #[token("match")]
+    Match,
+    #[token("elseif")]
+    Elseif,
     #[token("import")]
     Import,
     #[token("from")]
